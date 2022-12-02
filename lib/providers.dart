@@ -11,6 +11,7 @@ import 'package:app_order/models/category.dart';
 import 'package:app_order/models/pagination.dart';
 import 'package:app_order/models/product.dart';
 import 'package:app_order/models/product_filter.dart';
+import 'package:app_order/models/slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoriesProvider =
@@ -32,19 +33,6 @@ final homeProductProvider =
   return apiRespository.getProducts(productFilterModel);
 });
 
-// final productsFilterProvider =
-//     StateNotifierProvider<ProductsFilterNotifier, ProductFilterModel>(
-//   (ref) => ProductsFilterNotifier(),
-// );
-
-// final productNotifierProvider =
-//     StateNotifierProvider<ProductNotifier, ProductState>(
-//   (ref) => ProductNotifier(
-//    ref.watch(apiService),
-//    ref.watch(productsFilterProvider)
-//   ),
-// );
-
 final productsFilterProvider =
     StateNotifierProvider<ProductsFilterNotifier, ProductFilterModel>(
   (ref) => ProductsFilterNotifier(),
@@ -56,4 +44,15 @@ final productNotifierProvider =
     ref.watch(apiService),
     ref.watch(productsFilterProvider),
   ),
+);
+
+final slidersProvider =
+    FutureProvider.family<List<SliderModel>?, PaginationModel>(
+  (ref, paginationModel) {
+    final sliderRepo = ref.watch(apiService);
+    return sliderRepo.getSliders(
+      paginationModel.page,
+      paginationModel.pageSize,
+    );
+  },
 );

@@ -1,13 +1,8 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
-
 import '../api/api_service.dart';
 import '../config.dart';
 

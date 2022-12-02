@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, constant_identifier_names
 
 import 'dart:convert';
 
@@ -37,9 +37,8 @@ class SharedService {
     return null;
   }
 
-static Future<void> logout(BuildContext context) async {
-  await APICacheManager().deleteCache(KEY_NAME);
-  Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
-}
-
+  static Future<void> logout(BuildContext context) async {
+    await APICacheManager().deleteCache(KEY_NAME);
+    Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+  }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: implementation_imports, unused_element, prefer_const_constructors
+// ignore_for_file: implementation_imports, unused_element, prefer_const_constructors, duplicate_ignore
 import 'package:app_order/api/api_service.dart';
 import 'package:app_order/config.dart';
 import 'package:flutter/gestures.dart';
