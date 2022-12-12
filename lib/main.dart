@@ -2,6 +2,7 @@
 
 import 'package:app_order/pages/home_page.dart';
 import 'package:app_order/pages/login_page.dart';
+import 'package:app_order/pages/product_details_page.dart';
 import 'package:app_order/pages/product_page.dart';
 import 'package:app_order/pages/register_page.dart';
 import 'package:app_order/utils/shared_services.dart';
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         '/register': (BuildContext context) => const RegisterPage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/home': (BuildContext context) => const HomePage(),
-        '/products': (BuildContext context) => const ProductsPage()
+        '/products': (BuildContext context) => const ProductsPage(),
+        '/product-details': (BuildContext context) => const ProductDetailsPage()
       },
     );
   }

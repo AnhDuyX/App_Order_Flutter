@@ -31,8 +31,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
-                 Visibility(
+                Visibility(
                   visible: model!.calculateDiscount > 0,
                   child: Align(
                     alignment: Alignment.topLeft,
@@ -49,15 +48,20 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                
-                SizedBox(
-                  // ignore: sort_child_properties_last
-                  child: Image.network(
-                    model!.fullImagePath,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  child: SizedBox(
+                    // ignore: sort_child_properties_last
+                    child: Image.network(
+                      model!.fullImagePath,
+                      fit: BoxFit.cover,
+                    ),
+                    height: 85,
+                    width: MediaQuery.of(context).size.width,
                   ),
-                  height: 85,
-                  width: MediaQuery.of(context).size.width,
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/product-details",
+                        arguments: {'productId': model!.productId});
+                  },
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -78,36 +82,39 @@ class ProductCard extends StatelessWidget {
                   children: [
                     Flexible(
                         child: Padding(
-                      padding:
-                          EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(children: [Text(
-                            "${model!.productPrice.toInt().toString()}${Config.currency}",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: model!.calculateDiscount > 0
-                                  ? Colors.red
-                                  : Colors.black,
-                              fontWeight: FontWeight.bold,
-                              decoration: model!.productSalePrice > 0
-                                  ? TextDecoration.lineThrough
-                                  : null,
-                            ),
+                          Column(
+                            children: [
+                              Text(
+                                "${model!.productPrice.toInt().toString()}${Config.currency}",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: model!.calculateDiscount > 0
+                                      ? Colors.red
+                                      : Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: model!.productSalePrice > 0
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                                ),
+                              ),
+                              Text(
+                                (model!.calculateDiscount > 0)
+                                    ? "${model!.productSalePrice.toInt().toString()}${Config.currency}"
+                                    : "",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            (model!.calculateDiscount > 0)
-                                ? "${model!.productSalePrice.toInt().toString()}${Config.currency}"
-                                : "",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),],),
                           GestureDetector(
                             child: const Icon(
                               Icons.favorite_border,

@@ -56,6 +56,10 @@ class APIService {
     if (productFilterModel.sortBy != null) {
       queryString["sort"] = productFilterModel.sortBy!;
     }
+
+    if(productFilterModel.productIds != null){
+      queryString["productIds"] = productFilterModel.productIds!.join(",");
+    }
     // Response res = await get(Uri.parse(postsURL));
     var url = Uri.http(Config.apiURL, Config.productAPI, queryString);
     // log('data: $url');
@@ -143,4 +147,20 @@ class APIService {
       return null;
     }
   }
+Future<Product?> getProductDetails(String productId) async {
+ Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+
+  var url = Uri.http(Config.apiURL, Config.productAPI + "/" + productId);
+  var response = await client.get(url, headers: requestHeaders);
+
+  if(response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+
+    return Product.fromJson(data["data"]);
+  } else {
+    return null;
+  }
 }
+
+}
+

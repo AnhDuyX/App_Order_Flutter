@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'product.dart';
 
 // **************************************************************************
@@ -18,6 +16,9 @@ _$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
       productSKU: json['productSKU'] as String,
       productStatus: json['productStatus'] as String,
       productId: json['_id'] as String,
+      relatedProducts: (json['relatedProducts'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
       'productSKU': instance.productSKU,
       'productStatus': instance.productStatus,
       '_id': instance.productId,
+      'relatedProducts': instance.relatedProducts,
     };

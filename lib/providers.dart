@@ -12,6 +12,7 @@ import 'package:app_order/models/pagination.dart';
 import 'package:app_order/models/product.dart';
 import 'package:app_order/models/product_filter.dart';
 import 'package:app_order/models/slider.dart';
+import 'package:app_order/pages/product_details_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoriesProvider =
@@ -56,3 +57,14 @@ final slidersProvider =
     );
   },
 );
+
+final ProductDetailsProvider =
+    FutureProvider.family<Product?, String>((ref, productId) {
+  final apiRepository = ref.watch(apiService);
+  return apiRepository.getProductDetails(productId);
+});
+
+final ralatedProductsProvider = FutureProvider.family<List<Product>?, ProductFilterModel>((ref, productFilterModel){
+  final apiRepository = ref.watch(apiService);
+  return apiRepository.getProducts(productFilterModel);
+});
