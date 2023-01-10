@@ -9,13 +9,14 @@ part of 'product.dart';
 _$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
       productName: json['productName'] as String,
       category: Category.fromJson(json['category'] as Map<String, dynamic>),
-      productShortDescription: json['productShortDescription'] as String,
-      productPrice: (json['productPrice'] as num).toDouble(),
-      productSalePrice: (json['productSalePrice'] as num).toDouble(),
+      productShortDescription: json['productShortDescription'] as String?,
+      productPrice: json['productPrice'] as int,
+      productSalePrice: json['productSalePrice'] as int,
       productImage: json['productImage'] as String,
-      productSKU: json['productSKU'] as String,
-      productStatus: json['productStatus'] as String,
-      productId: json['_id'] as String,
+      productSKU: json['productSKU'] as String?,
+      productType: json['productType'] as String?,
+      productStatus: json['productStatus'] as String?,
+      productId: json['productId'] as String,
       relatedProducts: (json['relatedProducts'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -30,7 +31,8 @@ Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
       'productSalePrice': instance.productSalePrice,
       'productImage': instance.productImage,
       'productSKU': instance.productSKU,
+      'productType': instance.productType,
       'productStatus': instance.productStatus,
-      '_id': instance.productId,
+      'productId': instance.productId,
       'relatedProducts': instance.relatedProducts,
     };

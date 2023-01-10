@@ -1,10 +1,17 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
+import 'package:app_order/pages/cart_page.dart';
 import 'package:app_order/utils/shared_services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppBarWidget extends StatelessWidget {
+import '../pages/home_page.dart';
+
+class AppBarWidget extends StatefulWidget {
+  @override
+  State<AppBarWidget> createState() => _AppBarWidgetState();
+}
+
+class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -87,7 +94,10 @@ class AppBarWidget extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  // Sự kiện
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartPage()),
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.all(8),
@@ -134,18 +144,14 @@ class MenuItems {
   static Widget buildItem(MenuItem item) {
     return Row(
       children: [
-        Icon(
-                item.icon,
-                color: Colors.black,
-                size: 22
-        ),
+        Icon(item.icon, color: Colors.black, size: 22),
         const SizedBox(
           width: 10,
         ),
         Text(
           item.text,
           style: const TextStyle(
-             color: Colors.black,
+            color: Colors.black,
           ),
         ),
       ],
@@ -155,16 +161,23 @@ class MenuItems {
   static onChanged(BuildContext context, MenuItem item) {
     switch (item) {
       case MenuItems.home:
-      //Do something
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
         break;
+
       case MenuItems.cart:
-      //Do something
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartPage()),
+        );
         break;
       case MenuItems.favorite:
-      //Do something
+        //Do something
         break;
       case MenuItems.logout:
-      SharedService.logout(context);
+        SharedService.logout(context);
         break;
     }
   }

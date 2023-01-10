@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, avoid_print, avoid_unnecessary_containers, sized_box_for_whitespace
+// ignore_for_file: unused_element, avoid_print, avoid_unnecessary_containers, sized_box_for_whitespace, prefer_const_constructors, duplicate_ignore
 
 import 'package:app_order/models/pagination.dart';
 import 'package:app_order/providers.dart';
@@ -28,7 +28,7 @@ class HomeSliderWidget extends ConsumerWidget {
                 ),
                 // ignore: prefer_const_constructors
                 child: Text(
-                  "Các sản phẩm mới",
+                  "Các món ăn mới",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               )

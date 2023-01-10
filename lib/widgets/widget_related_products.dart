@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_element, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, unused_element, sort_child_properties_last, avoid_unnecessary_containers
 
 import 'package:app_order/components/product_card.dart';
 import 'package:app_order/models/pagination.dart';

@@ -14,7 +14,6 @@ class ProductsPage extends StatefulWidget {
 
   @override
   State<ProductsPage> createState() => _ProductsPageState();
-  
 }
 
 class _ProductsPageState extends State<ProductsPage> {
@@ -29,7 +28,7 @@ class _ProductsPageState extends State<ProductsPage> {
         ),
       ),
       body: Container(
-        color: Colors.grey[300],
+        color: Colors.grey[200],
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,20 +79,51 @@ class _ProductFilters extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final filterProvider = ref.watch(productsFilterProvider);
     return Container(
-      height: 51,
+      height: 60,
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(
-              CategoryName!,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            child: Container(
+              height: 55,
+              width: 200,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ],
+              ),
+              child: Text(
+                CategoryName!,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              ),
             ),
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.grey[300]),
+            
+            width: 70,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                )
+              ],
+            ),
             child: PopupMenuButton(
               onSelected: (sortBy) {
                 ProductFilterModel filterModel = ProductFilterModel(
@@ -105,7 +135,7 @@ class _ProductFilters extends ConsumerWidget {
                     .read(productsFilterProvider.notifier)
                     .setProductFilter(filterModel);
 
-                    ref.read(productNotifierProvider.notifier).getProducts();
+                ref.read(productNotifierProvider.notifier).getProducts();
               },
               initialValue: filterProvider.sortBy,
               itemBuilder: (BuildContext context) {
@@ -121,7 +151,7 @@ class _ProductFilters extends ConsumerWidget {
           ),
         ],
       ),
-     );
+    );
   }
 }
 

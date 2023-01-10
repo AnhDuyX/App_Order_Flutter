@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:app_order/api/api_service.dart';
+import 'package:app_order/application/notifier/cart_notifier.dart';
 import 'package:app_order/application/notifier/product_filter_notifier.dart';
 import 'package:app_order/application/notifier/products_notifier.dart';
+import 'package:app_order/application/state/cart_state.dart';
 import 'package:app_order/application/state/product_state.dart';
 // import 'package:app_order/application/notifier/product_filter_notifier.dart';
 // import 'package:app_order/application/notifier/product_notifier.dart';
@@ -12,8 +14,10 @@ import 'package:app_order/models/pagination.dart';
 import 'package:app_order/models/product.dart';
 import 'package:app_order/models/product_filter.dart';
 import 'package:app_order/models/slider.dart';
-import 'package:app_order/pages/product_details_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'application/notifier/order_notifier.dart';
+import 'application/state/order_state.dart';
 
 final categoriesProvider =
     FutureProvider.family<List<Category>?, PaginationModel>(
@@ -64,7 +68,21 @@ final ProductDetailsProvider =
   return apiRepository.getProductDetails(productId);
 });
 
-final ralatedProductsProvider = FutureProvider.family<List<Product>?, ProductFilterModel>((ref, productFilterModel){
+final ralatedProductsProvider =
+    FutureProvider.family<List<Product>?, ProductFilterModel>(
+        (ref, productFilterModel) {
   final apiRepository = ref.watch(apiService);
   return apiRepository.getProducts(productFilterModel);
 });
+
+final cartItemsProvider = StateNotifierProvider<CartNotifier, CartSate>(
+  (ref) => CartNotifier(
+    ref.watch(apiService),
+  ),
+);
+
+final ordersProvider = StateNotifierProvider<OrderNotifier, OrderSate>(
+  (ref) => OrderNotifier(
+    ref.watch(apiService),
+  ),
+);

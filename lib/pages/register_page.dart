@@ -21,6 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String? password;
   String? confirmPassword;
   String? email;
+  String? address;
+  String? phone;
   bool hidePassword = true;
   bool hideConfirmPassword = true;
 
@@ -99,6 +101,66 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 showPrefixIcon: true,
                 prefixIcon: Icon(Icons.tag_faces),
+                borderRadius: 10,
+                contentPadding: 15,
+                fontSize: 14,
+                prefixIconPaddingLeft: 10,
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                prefixIconColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.6),
+                backgroundColor: Colors.grey.shade100,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              
+              FormHelper.inputFieldWidget(
+                context,
+                "address",
+                "Địa Chỉ",
+                (onValidateVal) {
+                  if (onValidateVal.isEmpty) {
+                    return "Không được để trống!";
+                  }
+                  return null;
+                },
+                (onSaved) {
+                  address = onSaved.toString().trim();
+                },
+                showPrefixIcon: true,
+                prefixIcon: Icon(Icons.edit_location_alt_outlined),
+                borderRadius: 10,
+                contentPadding: 15,
+                fontSize: 14,
+                prefixIconPaddingLeft: 10,
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                prefixIconColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.6),
+                backgroundColor: Colors.grey.shade100,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              FormHelper.inputFieldWidget(
+                context,
+                "phone",
+                "Số Điện Thoại",
+                (onValidateVal) {
+                  if (onValidateVal.isEmpty) {
+                    return "Không được để trống!";
+                  }
+                  return null;
+                },
+                (onSaved) {
+                  phone = onSaved.toString().trim();
+                },
+                showPrefixIcon: true,
+                prefixIcon: Icon(Icons.phone),
                 borderRadius: 10,
                 contentPadding: 15,
                 fontSize: 14,
@@ -249,7 +311,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         isAsyncCallProcess = true;
                       });
 
-                      APIService.registerUer(fullName!, email!, password!)
+                      APIService.registerUer(fullName!, email!, password!, address!, phone!)
                           .then((response) {
                         setState(() {
                           isAsyncCallProcess = false;
@@ -258,7 +320,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           FormHelper.showSimpleAlertDialog(
                             context,
                             Config.appName,
-                            "Registration completed scuccessfully",
+                            "Đăng Ký Thành Công",
                             "OK",
                             () {
                               Navigator.of(context).pop();
@@ -270,7 +332,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           FormHelper.showSimpleAlertDialog(
                             context,
                             Config.appName,
-                            "Fasle",
+                            "Đăng Ký Thất Bại",
                             "OK",
                             () {
                               Navigator.of(context).pop();

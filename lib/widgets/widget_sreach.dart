@@ -3,7 +3,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SreachWidget extends StatelessWidget {
+class SreachWidget extends StatefulWidget {
+  @override
+  State<SreachWidget> createState() => _SreachWidgetState();
+}
+
+class _SreachWidgetState extends State<SreachWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(

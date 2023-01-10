@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable, unnecessary_nullable_for_final_variable_declarations, must_call_super, sort_child_properties_last, prefer_const_constructors, library_private_types_in_public_api, unused_element
 
+import 'dart:developer';
+
 import 'package:app_order/components/widget_col_exp.dart';
 import 'package:app_order/components/widget_custom_stepper.dart';
 import 'package:app_order/config.dart';
@@ -8,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/product.dart';
-import '../wedgets/widget_related_products.dart';
+import '../widgets/widget_related_products.dart';
 
 class ProductDetailsPage extends ConsumerStatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class ProductDetailsPage extends ConsumerStatefulWidget {
 }
 
 class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
+  int qty = 1;
   String productId = "";
   @override
   Widget build(BuildContext context) {
@@ -147,7 +150,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              "Mã sản phẩm: ${model.productSKU}",
+              "Mã món ăn: ${model.productSKU}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 13,
@@ -163,11 +166,16 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                 upperLimit: 20,
                 stepValue: 1,
                 iconSize: 22.0,
-                value: 1,
-                onChanged: (value) {},
+                value: qty,
+                onChanged: (value) {
+                  qty = value["qty"];
+                },
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  final cartViewModel = ref.read(cartItemsProvider.notifier);
+                  cartViewModel.addCartItem(model.productId, qty);
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.green),
                 ),
@@ -186,7 +194,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
             height: 15,
           ),
           ColExpand(
-            title: "Thông tin sản phẩm",
+            title: "Thông tin món ăn",
             content: model.productShortDescription,
           ),
           const SizedBox(

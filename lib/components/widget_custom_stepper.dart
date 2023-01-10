@@ -1,4 +1,6 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class CustomStepper extends StatefulWidget {
@@ -50,7 +52,7 @@ class _CustomStepperState extends State<CustomStepper> {
                     ? widget.lowerLimit
                     : widget.value -= widget.stepValue;
 
-                widget.onChanged(widget.value);
+                widget.onChanged({"qty": widget.value, "type": "-"});
               });
             },
           ),
@@ -78,7 +80,7 @@ class _CustomStepperState extends State<CustomStepper> {
                     ? widget.lowerLimit
                     : widget.value += widget.stepValue;
 
-                widget.onChanged(widget.value);
+               widget.onChanged({"qty": widget.value, "type": "+"});
               });
             },
           ),
